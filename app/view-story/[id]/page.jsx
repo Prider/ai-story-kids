@@ -14,6 +14,7 @@ function ViewStory({ params }) {
   const [story, setStory] = useState();
   const bookRef = useRef();
   const [count, setCount] = useState(0);
+
   useEffect(() => {
     console.log(params.id)
     getStory();

@@ -4,7 +4,7 @@ export default defineConfig({
   schema: "./config/schema.tsx",
   dialect: 'postgresql',
   dbCredentials: {
-    url: '<Your Connection String>'
+    url: 'postgresql://kidsstory_owner:bVtX63pPwMxN@ep-lingering-recipe-a151971w.ap-southeast-1.aws.neon.tech/kidsstory?sslmode=require'
   },
   verbose: true,
   strict: true,

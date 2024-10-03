@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import {getStorage} from "firebase/storage"
+import {getStorage} from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -9,13 +8,12 @@ import {getStorage} from "firebase/storage"
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: "tubeguruji-startups.firebaseapp.com",
-  databaseURL: "https://tubeguruji-startups-default-rtdb.firebaseio.com",
-  projectId: "tubeguruji-startups",
-  storageBucket: "tubeguruji-startups.appspot.com",
-  messagingSenderId: "706430327770",
-  appId: "1:706430327770:web:7c5d0f184aa62b3ead3ee3",
-  measurementId: "G-M8XSGSXME7"
+  authDomain: "punsook-story-kids.firebaseapp.com",
+  projectId: "punsook-story-kids",
+  storageBucket: "punsook-story-kids.appspot.com",
+  messagingSenderId: "75676578679",
+  appId: "1:75676578679:web:fc093d61a5d89a6df7a772",
+  measurementId: "G-04QD1HXWC9"
 };
 
 // Initialize Firebase

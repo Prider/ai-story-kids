@@ -52,7 +52,6 @@ function CreateStory() {
   }
 
   const GenerateStory=async()=>{
-
     if(userDetail.credit<=0)
       {
         notifyError('You dont have enough credits!');
@@ -67,34 +66,32 @@ function CreateStory() {
     .replace('{imageStyle}',formData?.imageStyle??'')
     //Generate AI Story
       try{
-        const result=await chatSession.sendMessage(FINAL_PROMPT);
-        const story=JSON.parse(result?.response.text().replace(/(})(,?)(\n *\})/g, "$1,"));
-       
-        // const jsonString=result?.response.text().replace(/":\s*"(.*?)"/g, '": "$1",')   // Adds comma after string values
-        // .replace(/":\s*(\d+)(?=\s*)/g, '": $1,') // Adds comma after numeric values
-        // .replace(/,\s*}/g, ' }'); // Removes the last comma before closing brace
-       // const story=JSON.parse(jsonString)
+        console.log('FINAL_PROMPT', FINAL_PROMPT);
+        const result = await chatSession.sendMessage(FINAL_PROMPT);
+        console.log('result?.response.text()', result?.response.text())
+        const story = result?.response.text().replace(/(})(,?)(\n *\})/g, "$1,");
+        console.log('story :', story);
        
          //Generate Image
-
-        const imageResp=await axios.post('/api/generate-image',{
+        const imageResp = await axios.post('/api/generate-image',{
           prompt:'Add text with  title:'+story?.story_cover?.title+
           " in bold text for book cover, "+story?.story_cover?.image_prompt
         })
-        const AiImageUrl=imageResp?.data?.imageUrl
         
-        const imageResult=await axios.post('/api/save-image',{
+        const AiImageUrl=imageResp?.data?.imageUrl
+        console.log('AiImageUrl :', AiImageUrl);
+        const imageResult = await axios.post('/api/save-image',{
           url:AiImageUrl
         });
-
-        const FirebaseStorageImageUrl=imageResult.data.imageUrl;
-      const resp:any= await SaveInDB(result?.response.text(),FirebaseStorageImageUrl);
+      console.log('imageResult.data.imageUrl :', imageResult.data.imageUrl);
+      const FirebaseStorageImageUrl=imageResult.data.imageUrl;
+      const resp:any= await SaveInDB(result?.response.text(), FirebaseStorageImageUrl);
         notify("Story generated")
        await UpdateUserCredits();
         router?.replace('/view-story/'+resp[0].storyId)
         setLoading(false);
       }catch(e){
-        console.log(e)
+        console.log('-------->',e)
         notifyError('Server Error, Try again')
         setLoading(false);
       }
